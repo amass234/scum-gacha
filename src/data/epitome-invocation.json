@@ -1,0 +1,79 @@
+[
+  {
+    "name": "Tool box small",
+    "rating": 3,
+    "src": "tool-box-small.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Toolbox",
+    "rating": 3,
+    "src": "tool-box.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Electrician Tool",
+    "rating": 5,
+    "src": "electrician-tools.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Weapon Cleaning Kit",
+    "rating": 5,
+    "src": "weapon-cleaning-kit.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Car Repair Kitl",
+    "rating": 3,
+    "src": "car-repair-kit.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Tire Repair",
+    "rating": 3,
+    "src": "tire-repair-kit.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Nails Package Box",
+    "rating": 3,
+    "src": "nails-package-box.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Needle",
+    "rating": 5,
+    "src": "needle.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Drill",
+    "rating": 4,
+    "src": "drill.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Rebar Cutter",
+    "rating": 4,
+    "src": "rebar-cutter.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Grinding Stone",
+    "rating": 3,
+    "src": "grindings-stone.png",
+    "isFeatured": true,
+    "type": "Tool"
+  }
+]
