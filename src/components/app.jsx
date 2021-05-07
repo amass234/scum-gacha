@@ -19,6 +19,7 @@ import BeginnersWish from "../models/beginners-wish";
 import EpitomeInvocation from "../models/epitome-invocation";
 import WanderlustInvocation from "../models/wanderlust-invocation";
 import { version } from "../../package.json";
+import firebase from "../firebase";
 
 export default class App extends Component {
   constructor(props) {
@@ -236,6 +237,12 @@ export default class App extends Component {
       farewellOfSnezhnaya2: this.farewellOfSnezhnaya2.getState(),
     };
     localStorage.setItem("data", JSON.stringify(data));
+    const user = JSON.parse(localStorage.getItem("user"));
+    const db = firebase.firestore().collection("items");
+    db.doc(user.key).update({
+      item: data,
+    });
+
     this.syncWishCountersWithState();
   }
   loadData() {

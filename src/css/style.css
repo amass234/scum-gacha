@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+@import "~antd/dist/antd.css";
 
 /* *:hover {
   cursor: url("../assets/images/ui/cursor.png"), auto !important;
@@ -247,8 +248,7 @@ button {
 }
 
 button:hover {
-  cursor: url("../assets/images/ui/cursor.png"), auto;
-  background-color: rgb(230, 227, 227);
+  cursor: pointer;
 }
 
 .skip-button {
@@ -270,11 +270,14 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #444;
+  background: #2196f3;
   margin-right: 27px;
   border-radius: 999px;
   height: 47px;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 23px;
+  border: none;
+  box-shadow: 9px 9px 12px #0000006b;
 }
 
 .wish-button.disabled {
@@ -293,7 +296,6 @@ button:hover {
 }
 
 .wish-button:hover {
-  cursor: url("../assets/images/ui/cursor.png"), auto;
   color: gold;
 }
 
@@ -621,4 +623,47 @@ td {
   .action-container > .button-container > button {
     width: 100%;
   }
+}
+
+.login {
+  position: absolute;
+  width: 100%;
+  background: #000000d1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.box-login {
+  width: 300px;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 13px;
+}
+
+.lumbark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.coin {
+  margin-right: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  background: #2196f3;
+  padding: 5px 23px;
+  border-radius: 19px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button:disabled,
+button[disabled] {
+  background-color: #cccccc;
+  color: #f1f1f1;
 }

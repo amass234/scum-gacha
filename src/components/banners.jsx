@@ -3,6 +3,10 @@ import BannerButton from "./banner-button";
 import { Carousel } from "react-responsive-carousel";
 import Modal from "./modal";
 import Settings from "./settings";
+import Login from "./login";
+import { WalletOutlined } from "@ant-design/icons";
+import firebase from "../firebase";
+import { notification } from "antd";
 
 const banners = require.context("../assets/images/banners", true);
 export default class Banners extends Component {
@@ -28,13 +32,47 @@ export default class Banners extends Component {
       },
       wasBeginnersWishDisabled: false,
       isSettingsPageVisible: false,
+      coin: 0,
+      empty: true,
+      key: "",
     };
   }
+
   componentDidMount() {
     this.toggleBeginnersWish(this.props.isBeginnersWishLimited);
-    this.setState({ selectedBanner: this.props.selectedBanner });
+    this.setState({
+      selectedBanner: this.props.selectedBanner,
+    });
     this.switchBanner("epitome-invocation");
+    this.getUserInfo();
   }
+
+  getUserInfo() {
+    const db = firebase.firestore().collection("items");
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      db.where("username", "==", user.username)
+        .where("key", "==", user.key)
+        .get()
+        .then((querySnapshot) => {
+          localStorage.setItem("empty", querySnapshot.empty);
+          this.setState({ empty: querySnapshot.empty });
+          if (!querySnapshot.empty) {
+            querySnapshot.forEach((doc) => {
+              localStorage.setItem("user", JSON.stringify(doc.data()));
+              this.setState({
+                coin: doc.data().coin,
+                key: doc.data().key,
+              });
+            });
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (
       prevProps.isBeginnersWishLimited !== this.props.isBeginnersWishLimited
@@ -137,8 +175,43 @@ export default class Banners extends Component {
       });
     }
   }
+  wish1(wish, selectedBanner) {
+    if (this.state.coin > 0 && this.state.coin > 9) {
+      wish(this.state.wishes[selectedBanner], true);
+      const db = firebase.firestore().collection("items");
+      const minuscoin = this.state.coin - 9;
+      db.doc(this.state.key)
+        .update({
+          coin: minuscoin,
+        })
+        .then((res) => {
+          this.getUserInfo();
+        });
+    }
+  }
+  wish10(wish, isBeginnersWishOver10, selectedBanner) {
+    if (this.state.coin >= 90) {
+      if (isBeginnersWishOver10 && selectedBanner === "beginners-wish") return;
+      wish(this.state.wishes[selectedBanner]);
+      const db = firebase.firestore().collection("items");
+      const minuscoin = this.state.coin - 90;
+      db.doc(this.state.key)
+        .update({
+          coin: minuscoin,
+        })
+        .then((res) => {
+          this.getUserInfo();
+        });
+    } else {
+      notification["info"]({
+        message: "Info",
+        description: "เงินคุณไม่พอกรุณาติดต่อ Admin",
+      });
+    }
+  }
+
   render() {
-    const { selectedBanner, isSettingsPageVisible } = this.state;
+    const { selectedBanner, isSettingsPageVisible, coin, empty } = this.state;
     const {
       wasDisclaimerSeen,
       setView,
@@ -167,6 +240,9 @@ export default class Banners extends Component {
             getFormattedCharacterEventWish={getFormattedCharacterEventWish}
           />
         )}
+        <div>
+          <Login getUserInfo={() => this.getUserInfo()} />
+        </div>
         <div className="wrapper banners">
           <div className="giws-banners-container">
             <div className="heading">
@@ -183,7 +259,10 @@ export default class Banners extends Component {
                   />
                 ))}
               </div>
-              <div className="close-window"></div>
+              <div className="coin">
+                <WalletOutlined style={{ marginRight: 10 }} />{" "}
+                {coin.toLocaleString()}
+              </div>
             </div>
             <div className="carousel-container">
               <Carousel
@@ -222,31 +301,30 @@ export default class Banners extends Component {
                 <button onClick={() => setView("inventory")}>Inventory</button>
               </div>
               <div className="wish-container d-flex justify-content-center">
-                <div
-                  onClick={() => {
-                    wish(this.state.wishes[selectedBanner], true);
-                  }}
-                  className="wish-button"
-                >
-                  Search
-                </div>
-                <div
-                  className={`wish-button ${
-                    selectedBanner === "beginners-wish" &&
-                    isBeginnersWishOver10 &&
-                    "disabled"
-                  }`}
-                  onClick={() => {
-                    if (
-                      isBeginnersWishOver10 &&
-                      selectedBanner === "beginners-wish"
-                    )
-                      return;
-                    wish(this.state.wishes[selectedBanner]);
-                  }}
-                >
-                  Search x10
-                </div>
+                {!empty && (
+                  <>
+                    <button
+                      disabled={this.state.coin < 9}
+                      onClick={() => this.wish1(wish, selectedBanner)}
+                      className="wish-button"
+                    >
+                      Search
+                    </button>
+                    <button
+                      disabled={this.state.coin < 90}
+                      className={`wish-button ${
+                        selectedBanner === "beginners-wish" &&
+                        isBeginnersWishOver10 &&
+                        "disabled"
+                      }`}
+                      onClick={() =>
+                        this.wish10(wish, isBeginnersWishOver10, selectedBanner)
+                      }
+                    >
+                      Search x10
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>
