@@ -51,7 +51,8 @@ const Login = (props) => {
     <div className="login" style={{ display: `${empty ? "flex" : "none"}` }}>
       <div className="box-login">
         <p className="lumbark">
-          <LockOutlined className="pr-4" /> Lumbark Admin
+          <LockOutlined className="pr-4" />
+          Scum Lumbark
         </p>
         <Form name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed}>
           <Form.Item

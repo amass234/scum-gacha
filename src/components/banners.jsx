@@ -4,7 +4,7 @@ import { Carousel } from "react-responsive-carousel";
 import Modal from "./modal";
 import Settings from "./settings";
 import Login from "./login";
-import { WalletOutlined } from "@ant-design/icons";
+import { LogoutOutlined, WalletOutlined } from "@ant-design/icons";
 import firebase from "../firebase";
 import { notification } from "antd";
 
@@ -60,6 +60,7 @@ export default class Banners extends Component {
           if (!querySnapshot.empty) {
             querySnapshot.forEach((doc) => {
               localStorage.setItem("user", JSON.stringify(doc.data()));
+              localStorage.setItem("data", JSON.stringify(doc.data().item));
               this.setState({
                 coin: doc.data().coin,
                 key: doc.data().key,
@@ -210,6 +211,11 @@ export default class Banners extends Component {
     }
   }
 
+  signOnt() {
+    localStorage.clear();
+    location.reload();
+  }
+
   render() {
     const { selectedBanner, isSettingsPageVisible, coin, empty } = this.state;
     const {
@@ -244,6 +250,7 @@ export default class Banners extends Component {
           <Login getUserInfo={() => this.getUserInfo()} />
         </div>
         <div className="wrapper banners">
+          <div className="bg-overay"></div>
           <div className="giws-banners-container">
             <div className="heading">
               <div className="current-banner">
@@ -259,9 +266,20 @@ export default class Banners extends Component {
                   />
                 ))}
               </div>
-              <div className="coin">
-                <WalletOutlined style={{ marginRight: 10 }} />{" "}
-                {coin.toLocaleString()}
+              <div className="d-flex justify-content-center align-items-center">
+                <div className="coin">
+                  <WalletOutlined style={{ marginRight: 10 }} />
+                  {coin.toLocaleString()}
+                </div>
+                <LogoutOutlined
+                  onClick={() => this.signOnt()}
+                  style={{
+                    marginRight: 10,
+                    cursor: "pointer",
+                    fontSize: 20,
+                    color: "#ff5722",
+                  }}
+                />
               </div>
             </div>
             <div className="carousel-container">
