@@ -15,14 +15,14 @@
   },
   {
     "name": "Electrician Tool",
-    "rating": 5,
+    "rating": 4,
     "src": "electrician-tools.png",
     "isFeatured": true,
     "type": "Tool"
   },
   {
     "name": "Weapon Cleaning Kit",
-    "rating": 5,
+    "rating": 4,
     "src": "weapon-cleaning-kit.png",
     "isFeatured": true,
     "type": "Tool"
@@ -50,7 +50,7 @@
   },
   {
     "name": "Needle",
-    "rating": 5,
+    "rating": 4,
     "src": "needle.png",
     "isFeatured": true,
     "type": "Tool"
@@ -73,6 +73,13 @@
     "name": "Grinding Stone",
     "rating": 3,
     "src": "grindings-stone.png",
+    "isFeatured": true,
+    "type": "Tool"
+  },
+  {
+    "name": "Bolts Packet Box",
+    "rating": 3,
+    "src": "bolts-package-box.png",
     "isFeatured": true,
     "type": "Tool"
   }
