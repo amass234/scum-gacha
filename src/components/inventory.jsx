@@ -106,7 +106,6 @@ export default class Inventory extends Component {
                       onChange={this.onChange}
                     >
                       <option value="listView">List</option>
-                      <option value="iconView">Icons</option>
                     </Input>
                   </FormGroup>
                 </Col>
