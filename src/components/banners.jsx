@@ -316,7 +316,12 @@ export default class Banners extends Component {
                   Settings
                 </button> */}
                 {/* <button onClick={() => setView("details")}>Details</button> */}
-                <button onClick={() => setView("inventory")}>Inventory</button>
+                <button
+                  onClick={() => setView("inventory")}
+                  className="wish-button"
+                >
+                  Inventory
+                </button>
               </div>
               <div className="wish-container d-flex justify-content-center">
                 {!empty && (

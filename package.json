@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "run-s webpack --output public",
+    "build": "run-s webpack",
     "webpack": "webpack",
     "test": "run-s test:*",
     "test:mocha": "mocha -r esm",

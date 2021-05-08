@@ -97,6 +97,7 @@ export default class App extends Component {
     this.setState({ selectedWish });
   }
   wish(selectedWish, isOneWish = false) {
+    console.log(this[selectedWish].roll());
     this.setState(
       {
         currentWishes: isOneWish

@@ -9,7 +9,7 @@ export default class BaseGacha {
     this.softPity = false;
     this.guaranteedFeatured4Star = false;
     this.guaranteedFeatured5Star = false;
-    this.standardRange = this.generateProbabilityRange(943, 51, 6);
+    this.standardRange = this.generateProbabilityRange(765, 51, 30);
     this.softPityRange = this.generateProbabilityRange(629, 51, 320);
     this.probabilityRange = this.standardRange;
   }
@@ -126,10 +126,22 @@ export default class BaseGacha {
     for (let i = 0; i < 10; i++) {
       roll.push(this.rollOnce());
     }
+
     const roll_ = roll.filter(function (x) {
       return x !== undefined;
     });
 
+    if (roll_.length < 10) {
+      for (let i = roll_.length; i < 10; i++) {
+        roll_.push({
+          name: "Grinding Stone",
+          rating: 3,
+          src: "grindings-stone.png",
+          isFeatured: true,
+          type: "Tool",
+        });
+      }
+    }
     return roll_;
   }
 
