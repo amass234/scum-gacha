@@ -191,11 +191,11 @@ export default class Banners extends Component {
     }
   }
   wish10(wish, isBeginnersWishOver10, selectedBanner) {
-    if (this.state.coin >= 90) {
+    if (this.state.coin >= 89) {
       if (isBeginnersWishOver10 && selectedBanner === "beginners-wish") return;
       wish(this.state.wishes[selectedBanner]);
       const db = firebase.firestore().collection("items");
-      const minuscoin = this.state.coin - 90;
+      const minuscoin = this.state.coin - 89;
       db.doc(this.state.key)
         .update({
           coin: minuscoin,
@@ -334,7 +334,7 @@ export default class Banners extends Component {
                       Search
                     </button>
                     <button
-                      disabled={this.state.coin < 90}
+                      disabled={this.state.coin < 89}
                       className={`wish-button ${
                         selectedBanner === "beginners-wish" &&
                         isBeginnersWishOver10 &&
