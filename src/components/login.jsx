@@ -24,6 +24,7 @@ const Login = (props) => {
             querySnapshot.forEach((doc) => {
               console.log(doc.data());
               localStorage.setItem("user", JSON.stringify(doc.data()));
+              localStorage.setItem("data", JSON.stringify(data.data().item));
             });
             notification["success"]({
               message: "Success",

@@ -177,7 +177,7 @@ export default class Banners extends Component {
     }
   }
   wish1(wish, selectedBanner) {
-    if (this.state.coin > 0 && this.state.coin > 9) {
+    if (this.state.coin > 0 && this.state.coin >= 9) {
       wish(this.state.wishes[selectedBanner], true);
       const db = firebase.firestore().collection("items");
       const minuscoin = this.state.coin - 9;
